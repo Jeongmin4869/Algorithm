@@ -6,56 +6,40 @@ using namespace std;
 
 string solution(string new_id) {
 	string answer = "";
-
 	//1단계
 	for (int i = 0; i < new_id.length(); i++) {
 		new_id[i] = tolower(new_id[i]);
 	}
-
-
 	//2단계
-
 	for (int i = 0; i < new_id.length(); i++) {
 		if ((new_id[i] == '-' || new_id[i] == '_' || new_id[i] == '.') ||
 			(new_id[i] >= 'a' && new_id[i] <= 'z') ||
-			(new_id[i] >= '1' && new_id[i] <= '9')) {//숫자
-			printf("d", new_id.c_str());
-			continue;
+			(new_id[i] >= '0' && new_id[i] <= '9')) {//숫자
+			answer += new_id[i];
 		}
-		else {
-		}
-
 	}
-
-
-
 	//3단계
-	for (int i = 0; i < new_id.length() - 1; i++) {
-		if (new_id[i] == new_id[i + 1] && new_id[i] == '.') {
-			new_id.erase(i + 1);
+	for (int i = 0; i < answer.length() - 1; i++) {
+		if (answer[i] == answer[i + 1] && answer[i] == '.') {
+			answer.erase(i, 1);
 			i--;
 		}
 	}
-	//printf("%s", new_id.c_str());
-
 	//4단계
-	if (new_id[0] == '.') new_id.erase(0);
-	if (new_id[new_id.length() - 1] == '.') new_id.erase(new_id.length() - 1);
-
+	if (answer[0] == '.') answer.erase(0, 1);
+	if (answer[answer.length() - 1] == '.') answer.erase(answer.length() - 1, 1);
 	//5단계
-	if (new_id.length() == 0) new_id = "a";
-
+	if (answer == "") answer = "a";
 	//6단계
-	if (new_id.length() >= 16) new_id = new_id.substr(0, 15);
-	if (new_id[new_id.length() - 1] == '.') new_id.erase(new_id.length() - 1);
-
+	if (answer.length() >= 16) answer = answer.substr(0, 15);
+	if (answer[answer.length() - 1] == '.') answer.erase(answer.length() - 1, 1);
 	//7단계
-	if (new_id.length() <= 2) {
-		string last = new_id.substr(new_id.length(), new_id.length());
-		while (new_id.length() == 3) {
-			new_id.append(last);
+	if (answer.length() <= 2) {
+		char last = answer[answer.length() - 1];
+		while (answer.length() < 3) {
+			answer += last;
 		}
 	}
 
-	return new_id;
+	return answer;
 }
