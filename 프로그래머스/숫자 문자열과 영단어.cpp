@@ -1,9 +1,27 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
+ï»¿#include <string>
+#include <vector>
+#include <unordered_map>
+using namespace std;
 
-// ÆÄ¶ó¹ÌÅÍ·Î ÁÖ¾îÁö´Â ¹®ÀÚ¿­Àº const·Î ÁÖ¾îÁı´Ï´Ù. º¯°æÇÏ·Á¸é ¹®ÀÚ¿­À» º¹»çÇØ¼­ »ç¿ëÇÏ¼¼¿ä.
-int solution(const char* s) {
+int solution(string s) {
 	int answer = 0;
+	unordered_map<string, int> hash;
+	hash["one"] = 1;
+	hash["two"] = 2;
+	hash["three"] = 3;
+	hash["four"] = 4;
+	hash["five"] = 5;
+	hash["six"] = 6;
+	hash["seven"] = 7;
+	hash["eight"] = 8;
+	hash["nine"] = 9;
+
+	for (int i = 0; i < s.length(); i++) {
+		if (s[i] >= '0' && s[i] <= '9') // ìˆ«ìì¼ë•Œ
+
+			answer += s[i] % '0';
+		//if(hash[substr(i,3)])
+	}
+
 	return answer;
 }
