@@ -12,8 +12,6 @@ string solution(vector<int> numbers, string hand) {
 	//unordered_map<int , int[]> hash;
 	//hash[1] = [0,0];
 
-
-
 	for (int i = 0; i < numbers.size(); i++) {
 		int num = numbers[i];
 		if (num == 1 || num == 4 || num == 7) {
@@ -25,11 +23,12 @@ string solution(vector<int> numbers, string hand) {
 			now_r = num;
 		}
 		else { //2 5 8 0
-			if (now_l + 2 == now_r || now_l + 4 == now_r || now_l + 8 == now_r) {
+			if (now_l + 2 == now_r) {// || now_l + 4 == now_r || now_l + 8 == now_r){
 				answer += h;
 				h == 'L' ? now_l = num : now_r = num;
 			}
 			else {
+				//now_l + now_r == && 10 num == 5
 				if (num == 8 && (now_l == 0 || now_r == 0)) {
 					now_l == 0 ? answer += 'L' : answer += 'R';
 					now_l == 0 ? now_l = num : now_r = num;
