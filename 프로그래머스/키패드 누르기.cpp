@@ -1,47 +1,51 @@
 #include <string>
 #include <vector>
 #include<cstdlib> //abs for int, long int
-//#include <unordered_map>
+#include <cmath>
 
 using namespace std;
 
+double cal(vector<int> po_1, vector<int> po_2)
+{
+	return sqrt(pow(po_1[0] - po_2[0], 2) +
+		pow(po_1[1] - po_2[1], 2));
+}
+
+
 string solution(vector<int> numbers, string hand) {
 	string answer = "";
-	int now_l = 0, now_r = 0;
+	vector<int> lh = { 0,3 }; // x,y
+	vector<int> rh = { 2,3 };
+	vector<int> n_po = { 0,0 };
 	char h = hand == "left" ? 'L' : 'R';
-	//unordered_map<int , int[]> hash;
-	//hash[1] = [0,0];
 
 	for (int i = 0; i < numbers.size(); i++) {
 		int num = numbers[i];
+
 		if (num == 1 || num == 4 || num == 7) {
 			answer += 'L';
-			now_l = num;
+			lh = { (num - 1) / 3, (num - 1) % 3 };
+
 		}
 		else if (num == 3 || num == 6 || num == 9) {
 			answer += 'R';
-			now_r = num;
+			rh = { (num - 1) / 3, (num - 1) % 3 };
 		}
 		else { //2 5 8 0
-			if (now_l + 2 == now_r) {// || now_l + 4 == now_r || now_l + 8 == now_r){
-				answer += h;
-				h == 'L' ? now_l = num : now_r = num;
+			if (num == 0) n_po = { 1,3 };
+			else n_po = { (num - 1) / 3, (num - 1) % 3 };
+
+			if (cal(lh, n_po) < cal(rh, n_po)) {
+				answer += 'L';
+				lh = n_po;
+			}
+			else if (cal(lh, n_po) > cal(rh, n_po)) {
+				answer += 'R';
+				rh = n_po;
 			}
 			else {
-				//now_l + now_r == && 10 num == 5
-				if (num == 8 && (now_l == 0 || now_r == 0)) {
-					now_l == 0 ? answer += 'L' : answer += 'R';
-					now_l == 0 ? now_l = num : now_r = num;
-					printf("%s", answer.c_str());
-				}
-				else if (abs(now_l - num) < abs(now_r - num)) {
-					answer += 'L';
-					now_l = num;
-				}
-				else {
-					answer += 'R';
-					now_r = num;
-				}
+				h == 'L' ? answer += 'L' : answer += 'R';
+				h == 'L' ? lh = n_po : rh = n_po;
 			}
 		}
 	}
