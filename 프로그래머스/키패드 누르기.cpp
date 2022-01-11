@@ -5,12 +5,10 @@
 
 using namespace std;
 
-double cal(vector<int> po_1, vector<int> po_2)
+int cal(vector<int> po_1, vector<int> po_2)
 {
-	return sqrt(pow(po_1[0] - po_2[0], 2) +
-		pow(po_1[1] - po_2[1], 2));
+	return abs(po_1[0] - po_2[0]) + abs(po_1[1] - po_2[1]);
 }
-
 
 string solution(vector<int> numbers, string hand) {
 	string answer = "";
@@ -21,20 +19,18 @@ string solution(vector<int> numbers, string hand) {
 
 	for (int i = 0; i < numbers.size(); i++) {
 		int num = numbers[i];
+		if (num == 0) n_po = { 1,3 };
+		else n_po = { (num - 1) % 3, (num - 1) / 3 };
 
 		if (num == 1 || num == 4 || num == 7) {
 			answer += 'L';
-			lh = { (num - 1) / 3, (num - 1) % 3 };
-
+			lh = n_po;
 		}
 		else if (num == 3 || num == 6 || num == 9) {
 			answer += 'R';
-			rh = { (num - 1) / 3, (num - 1) % 3 };
+			rh = n_po;
 		}
 		else { //2 5 8 0
-			if (num == 0) n_po = { 1,3 };
-			else n_po = { (num - 1) / 3, (num - 1) % 3 };
-
 			if (cal(lh, n_po) < cal(rh, n_po)) {
 				answer += 'L';
 				lh = n_po;
