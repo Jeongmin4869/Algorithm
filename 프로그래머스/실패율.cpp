@@ -15,7 +15,7 @@ vector<int> solution(int N, vector<int> stages) {
 			stay[stages[i] - 1] ++;
 	}
 
-	for (int i = 0; i < stay.size(); i++) {
+	for (int i = 0; i < person; i++) {
 		if (person == 0) {
 			fRate.push_back(0.0);
 			continue;
