@@ -6,11 +6,10 @@ using namespace std;
 
 vector<int> solution(int N, vector<int> stages) {
 	vector<int> answer;
-	vector<int> stay;
+	vector<int> stay(N, 0);
 	vector<float> fRate;
 	int person = stages.size();
 
-	stay.assign(N, 0);
 	for (int i = 0; i < stages.size(); i++) {
 		if (stages[i] <= N)
 			stay[stages[i] - 1] ++;
@@ -24,6 +23,7 @@ vector<int> solution(int N, vector<int> stages) {
 		fRate.push_back((float)stay[i] / person);
 		person -= stay[i];
 	}
+
 
 	for (int i = 0; i < fRate.size(); i++) {
 		int max_index = max_element(fRate.begin(), fRate.end()) - fRate.begin();
