@@ -1,32 +1,53 @@
-#include <string>
+﻿#include <string>
 #include <cmath>
-
+#include <vector>
 using namespace std;
 
 int solution(string dartResult) {
 	int answer = 0;
-	int i = 0;
+	int i = 0, j = 0;
+	vector<int> num;
+	char word;
 	while (i + 2 < dartResult.length()) {
-		int num = dartResult.at(i) - '0';
-		char char1 = dartResult.at(i + 1);
-		if (char1 == 'S') {
-			answer += num;
+		num.push_back(dartResult[i] - '0');
+		if (dartResult[i + 1] == '0') {
+			printf("10존재 ");
+			//num[j] = 10;
+			//i++;
 		}
-		else if (char1 == 'D') {
-			answer += pow(num, 2);
+		printf("%d ", num[j]);
+		word = dartResult[i + 1];
+
+		if (word == 'D') {
+			num[j] = pow(num[j], 2);
 		}
-		else answer += pow(num, 3);
+		else if (word == 'T') {
+			num[j] = pow(num[j], 3);
+		}
 
-		char char2 = dartResult.at(i + 2);
-
-		if (char2 >= '0' &&char2 <= '9') {
-			i += 2;
-			continue;
+		word = dartResult.at(i + 2);
+		if (word == '*') {
+			num[j] = num[j] * 2;
+			if (i != 0) {
+				num[j - 1] = num[j - 1] * 2;
+			}
+		}
+		else if (word == '#') {
+			num[j] = num[j] * -1;
 		}
 		else {
-			//if(char2 == '*')
+			i += 2;
+			j++;
+			continue;
 		}
 		i += 3;
+		j++;
 	}
-	return answer;
+
+
+	printf("%d ", num[0]);
+	printf("%d ", num[1]);
+	printf("%d ", num[2]);
+
+	return answer = num[0] + num[1] + num[2];
 }
