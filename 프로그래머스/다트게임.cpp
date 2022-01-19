@@ -17,24 +17,16 @@ int solution(string dartResult) {
 		}
 
 		word = dartResult[++i];
-		if (word == 'D') {
-			score[j] = pow(score[j], 2);
-		}
-		else if (word == 'T') {
-			score[j] = pow(score[j], 3);
-		}
+		if (word == 'D') score[j] = pow(score[j], 2);
+		else if (word == 'T') score[j] = pow(score[j], 3);
 
 		if (dartResult[++i] != NULL) {
 			word = dartResult[i];
 			if (word == '*') {
 				score[j] = score[j] * 2;
-				if (i != 0) {
-					score[j - 1] = score[j - 1] * 2;
-				}
+				if (i != 0) score[j - 1] = score[j - 1] * 2;
 			}
-			else if (word == '#') {
-				score[j] = score[j] * -1;
-			}
+			else if (word == '#') score[j] = score[j] * -1;
 			else continue;
 		}
 		i++;
