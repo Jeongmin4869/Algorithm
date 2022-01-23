@@ -6,21 +6,18 @@ using namespace std;
 
 vector<int> solution(vector<int> lottos, vector<int> win_nums) {
 	vector<int> answer(2, lottos.size() + 1);
-	//Á¤·Ä
-	sort(lottos.begin(), lottos.end());
-	sort(win_nums.begin(), win_nums.end());
 
-	for (int i = 0; i < lottos.size(); i++) {
-		if (lottos[i] == win_nums[i]) {
+	for (int i = 0; i < 6; i++) {
+		int num = lottos[i];
+		if (find(win_nums.begin(), win_nums.end(), num) != win_nums.end()) {
 			answer[0] --;
 			answer[1] --;
 		}
-		else if (win_nums[i] == 0) answer[0]--;
+		else if (num == 0) answer[0] --;
 	}
 
-	if (answer[1] == lottos.size() + 1) answer[1] = lottos.size();
-
-
+	if (answer[0] >= 6) answer[0] = 6;
+	if (answer[1] >= 6) answer[1] = 6;
 
 	return answer;
 }
