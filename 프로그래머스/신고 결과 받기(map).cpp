@@ -10,7 +10,6 @@ using namespace std;
 vector<int> solution(vector<string> id_list, vector<string> report, int k) {
 	string name;
 	string name2;
-	int idx = 0;
 	vector<int> answer(id_list.size(), 0);
 
 	unordered_map<string, set<string>> um; // 신고한사람, 신고당한사람 // set
