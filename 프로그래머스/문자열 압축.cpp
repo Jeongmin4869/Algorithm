@@ -8,15 +8,18 @@ int solution(string s) {
 	bool first = false;
 	string a, before;
 
-	for (int i = 2; i < s.length() / 2; i++) {
+	for (int i = 1; i <= s.length() / 2; i++) {
+		len = 0;
 		for (int j = 0; j < s.length(); j += i) {
 			a = s.substr(j, i);
 			len += i;
 			if (before == a) {
+				printf("%d ", i);
 				len -= i;
 				if (!first) len++, first = true;
 			}
 			else first = false;
+			before = a;
 		}
 		if (answer > len) answer = len;
 	}
