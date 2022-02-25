@@ -5,20 +5,20 @@ using namespace std;
 int solution(string s) {
 	int answer = s.length();
 	int len = 0;
-	int count = 0;
-	string a, b_s, f_s;
+	bool first = false;
+	string a, before;
 
 	for (int i = 2; i < s.length() / 2; i++) {
-
 		for (int j = 0; j < s.length(); j += i) {
-			f_s = s.substr(j, i);
-			//substr(3, 5)
-			b_s = f_s;
+			a = s.substr(j, i);
+			len += i;
+			if (before == a) {
+				len -= i;
+				if (!first) len++, first = true;
+			}
+			else first = false;
 		}
-
-		if (a.length() < answer) answer = a.length();
-
-
+		if (answer > len) answer = len;
 	}
 
 	return answer;
