@@ -1,4 +1,4 @@
-#include <string>
+ï»¿#include <string>
 #include <vector>
 #include <sstream>
 
@@ -12,8 +12,8 @@ vector<string> solution(vector<string> record) {
 		string id, state, s;
 		stream1 >> state >> id;
 		stream1 >> id;
-		s += id + "´ÔÀÌ ";
-		state == "Enter" ? s += "µé¾î¿Ô½À´Ï´Ù." : s += "³ª°¬½À´Ï´Ù.";
+		s += id + "ë‹˜ì´ ";
+		state == "Enter" ? s += "ë“¤ì–´ì™”ìŠµë‹ˆë‹¤." : s += "ë‚˜ê°”ìŠµë‹ˆë‹¤.";
 		answer.push_back(s);
 	}
 	return answer;
