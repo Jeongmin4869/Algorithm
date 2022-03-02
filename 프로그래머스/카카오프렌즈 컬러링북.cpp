@@ -1,11 +1,28 @@
-#include <vector>
+ï»¿#include <vector>
 
 using namespace std;
 
-// Àü¿ª º¯¼ö¸¦ Á¤ÀÇÇÒ °æ¿ì ÇÔ¼ö ³»¿¡ ÃÊ±âÈ­ ÄÚµå¸¦ ²À ÀÛ¼ºÇØÁÖ¼¼¿ä.
+//ê¹Šì´íƒìƒ‰...
+void DFS(int x, int y) {
+	visit[x][y] = true;
+	cnt++;
+	for (int i = 0; i < 4; i++) {
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+		if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
+		if (arr[nx][ny] == 0 && !visit[nx][ny]) {
+			DFS(nx, ny);
+		}
+	}
+}
+
+// ì „ì—­ ë³€ìˆ˜ë¥¼ ì •ì˜í•  ê²½ìš° í•¨ìˆ˜ ë‚´ì— ì´ˆê¸°í™” ì½”ë“œë¥¼ ê¼­ ì‘ì„±í•´ì£¼ì„¸ìš”.
 vector<int> solution(int m, int n, vector<vector<int>> picture) {
 	int number_of_area = 0;
 	int max_size_of_one_area = 0;
+	//ìš°ì¸¡ê³¼ í•˜ë‹¨ì„ ê³„ì† ìŠ¤ìº”??
+
+
 
 	vector<int> answer(2);
 	answer[0] = number_of_area;
