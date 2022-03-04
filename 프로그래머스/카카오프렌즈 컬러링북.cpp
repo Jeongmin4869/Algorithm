@@ -10,15 +10,15 @@ int dy[4] = { 1,-1,0,0 };
 //깊이탐색
 //DFS : 깊이우선탐색
 //BFS : 너비우선탐색, 큐
-void DFS(int x, int y, vector<vector<int>> picture) {
+void DFS(int x, int y, vector<vector<int>> picture, int num) {
 	visit[x][y] = true;
 	cnt++;
 	for (int i = 0; i < 4; i++) {
 		int nx = x + dx[i];
 		int ny = y + dy[i];
 		if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
-		if (picture[nx][ny] == 0 && !visit[nx][ny]) {
-			DFS(nx, ny, picture);
+		if (picture[nx][ny] == num && !visit[nx][ny]) {
+			DFS(nx, ny, picture, picture[nx][ny]);
 		}
 	}
 }
@@ -30,14 +30,14 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
 
 	visit[100][100] = { false, };
 	num = 0, cnt = 0;
-	//dx[4] = { 0, 0, 1, -1 };
-	//dy[4] = { 1, -1, 0, 0 };
 	N = n;
 	M = m;
 
-
-	//우측과 하단을 계속 스캔??
-
+	while (!visit[m][n]) {
+		//우측과 하단을 계속 스캔??
+			//DFS
+		visit[m][n] = true;
+	}
 
 
 	vector<int> answer(2);
