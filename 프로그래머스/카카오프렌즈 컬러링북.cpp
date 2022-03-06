@@ -16,7 +16,7 @@ void DFS(int x, int y, vector<vector<int>> picture, int num) {
 	for (int i = 0; i < 4; i++) {
 		int nx = x + dx[i];
 		int ny = y + dy[i];
-		if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
+		if (nx < 0 || ny < 0 || nx >= M || ny >= N) continue;
 		if (picture[nx][ny] == num && !visit[nx][ny]) {
 			DFS(nx, ny, picture, picture[nx][ny]);
 		}
@@ -35,7 +35,8 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
 	while (!visit[m - 1][n - 1]) {
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
-				if (!visit[i][j]) { // 오류 && !picture[i][j]) {
+				if (!visit[i][j] && picture[i][j] != 0) {
+					cout << i << "," << j << endl;
 					cnt = 0;
 					DFS(i, j, picture, picture[i][j]);
 					number_of_area++;
