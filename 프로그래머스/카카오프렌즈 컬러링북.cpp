@@ -1,11 +1,10 @@
 ﻿#include <vector>
-#include <iostream>
 using namespace std;
 
 bool visit[100][100];
-int num = 0, cnt = 0, N, M;
-int dx[4] = { 0,0,1,-1 };
-int dy[4] = { 1,-1,0,0 };
+int num, cnt, N, M;
+int dx[4];
+int dy[4];
 
 //깊이탐색
 //DFS : 깊이우선탐색
@@ -31,21 +30,22 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
 	num = 0, cnt = 0;
 	N = n;
 	M = m;
+	dx[0] = 0, dx[1] = 0, dx[2] = 1, dx[3] = -1;
+	dy[0] = 1, dy[1] = -1, dy[2] = 0, dy[3] = 0;
 
-	while (!visit[m - 1][n - 1]) {
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
-				if (!visit[i][j] && picture[i][j] != 0) {
-					cout << i << "," << j << endl;
-					cnt = 0;
-					DFS(i, j, picture, picture[i][j]);
-					number_of_area++;
-					if (cnt > max_size_of_one_area) max_size_of_one_area = cnt;
-					cnt = 0;
-				}
+
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			if (!visit[i][j] && picture[i][j] != 0) {
+				cnt = 0;
+				DFS(i, j, picture, picture[i][j]);
+				number_of_area++;
+				if (cnt > max_size_of_one_area) max_size_of_one_area = cnt;
+				cnt = 0;
 			}
 		}
 	}
+
 
 
 	vector<int> answer(2);
