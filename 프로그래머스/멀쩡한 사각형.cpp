@@ -1,6 +1,5 @@
 ﻿#include <cmath>
 #include <algorithm>
-#include <iostream>
 using namespace std;
 
 long long solution(int w, int h) {
@@ -9,8 +8,8 @@ long long solution(int w, int h) {
 	for (; a > 0; a--) {
 		if (w%a == 0 && h%a == 0) break;
 	}
-	cout << a;
-	return answer = w * h - (a - 1) * (a - 2);
+	long long ws = w / a, hs = h / a;
+	return answer = (long long)w*h - (ws + hs - 1)*a;
 }
 
 /*
