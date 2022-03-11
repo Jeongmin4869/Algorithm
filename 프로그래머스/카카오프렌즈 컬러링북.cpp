@@ -1,4 +1,5 @@
 ﻿#include <vector>
+#include <string.h> // memset
 using namespace std;
 
 bool visit[100][100];
@@ -25,8 +26,7 @@ void DFS(int x, int y, vector<vector<int>> picture, int num) {
 vector<int> solution(int m, int n, vector<vector<int>> picture) {
 	int number_of_area = 0; // 구역
 	int max_size_of_one_area = 0; // 가장 큰 구역 칸 개수
-
-	visit[100][100] = { false, };
+	memset(visit, false, sizeof(visit));
 	num = 0, cnt = 0;
 	N = n;
 	M = m;
@@ -45,8 +45,6 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
 			}
 		}
 	}
-
-
 
 	vector<int> answer(2);
 	answer[0] = number_of_area;
