@@ -1,15 +1,37 @@
-#include <string>
+ï»¿#include <string>
 #include <vector>
 #include <sstream>
 #include <unordered_map>
 
 using namespace std;
 
-// Àü¿ª º¯¼ö¸¦ Á¤ÀÇÇÒ °æ¿ì ÇÔ¼ö ³»¿¡ ÃÊ±âÈ­ ÄÚµå¸¦ ²À ÀÛ¼ºÇØÁÖ¼¼¿ä.
+int count;
+vector<int> friends[8];
+
+//ê²½ìš°ì˜ ìˆ˜ ë‹¤ êµ¬í•˜ê¸°??
+int dfs(int n, vector<string> data) {
+	for (int i = 0; i < data.size(); i++) {
+		char A = data[0], B = data[2];
+
+		switch (data[4]) {
+		case '=':
+			break;
+		case '<':
+			break;
+		case '>':
+			break;
+		}
+
+	}
+}
+
+// ì „ì—­ ë³€ìˆ˜ë¥¼ ì •ì˜í•  ê²½ìš° í•¨ìˆ˜ ë‚´ì— ì´ˆê¸°í™” ì½”ë“œë¥¼ ê¼­ ì‘ì„±í•´ì£¼ì„¸ìš”.
 int solution(int n, vector<string> data) {
+	count = 0;
+	friends = { A, C, F, J, M, N, R, T };
 	//sstream
 
 
-	int answer = 0; // ¸ğµç Á¶°ÇÀ» ¸¸Á·ÇÏ´Â °æ¿ìÀÇ ¼ö
+	int answer = 0; // ëª¨ë“  ì¡°ê±´ì„ ë§Œì¡±í•˜ëŠ” ê²½ìš°ì˜ ìˆ˜
 	return answer;
 }
