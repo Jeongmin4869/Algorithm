@@ -19,12 +19,11 @@ int solution(vector<int> scoville, int K) {
 	}
 
 	while (pq.top() < K) {
+		if (pq.size() <= 1) return -1;
 		int n = pq.top(); pq.pop();
 		pq.push(n + pq.top() * 2); pq.pop();
 		answer++;
 	}
-
-
 
 	return answer;
 }
