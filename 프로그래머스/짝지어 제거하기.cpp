@@ -1,19 +1,17 @@
-﻿#include <iostream>
-#include <string>
-//#include <sstream>
-
+﻿#include <string>
+#include <iostream>
 using namespace std;
 
 int solution(string s)
 {
-	int answer = 0;
-	//stringstream str1;
-	for (int i = 0; i < s.length() - 1; i++) {
+	int answer = 0, i = 0;
+	while (i < s.length()) {
 		if (s[i] == s[i + 1]) {
-			answer++;
+			s.erase(i, 2);
 			i = 0;
-			//s변경
 		}
+		else i++;
+		if (s.length() == 0) return 1;
 	}
-	return answer;
+	return 0;
 }
