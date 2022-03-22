@@ -1,17 +1,18 @@
 ﻿#include <string>
 #include <iostream>
+#include <stack> 
 using namespace std;
 
+//while문은 효율성 테스트 통과 X
+//O(n)으로 통과해야 ..
 int solution(string s)
 {
-	int answer = 0, i = 0;
-	while (i < s.length()) {
-		if (s[i] == s[i + 1]) {
-			s.erase(i, 2);
-			i = 0;
+	stack<int> st;
+	for (int i = 0; i < s.length(); i++) {
+		if (!st.empty() && st.top() == s[i]) {
+			st.pop();
 		}
-		else i++;
-		if (s.length() == 0) return 1;
+		else st.push(s[i]);
 	}
-	return 0;
+	return st.empty() ? 1 : 0;
 }
