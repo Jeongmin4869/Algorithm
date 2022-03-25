@@ -22,6 +22,15 @@ vector<vector<int>> set_v(int a, int b) {
 vector<int> solution(int rows, int columns, vector<vector<int>> queries) {
 	vector<int> answer;
 	vector<vector<int>> v = set_v(rows, columns);
+
+	for (auto k : v) {
+		for (auto j : k) {
+			cout << j << " ";
+		}
+		cout << endl;
+	}
+	cout << endl;
+
 	int min = 0;
 	int temp, before, len, x, y, x1, x2, y1, y2;
 	for (auto q : queries) {
@@ -32,7 +41,7 @@ vector<int> solution(int rows, int columns, vector<vector<int>> queries) {
 		x = q[0] - 1; y = q[1] - 1;
 		before = v[x][y++];
 		min = before;
-		for (int i = 0; i < len; i++) {
+		for (int i = 0; i < len + 1; i++) {
 			temp = v[x][y];
 			v[x][y] = before;
 			before = temp;
@@ -61,6 +70,15 @@ vector<int> solution(int rows, int columns, vector<vector<int>> queries) {
 		if (temp < min) min = temp;
 		answer.push_back(min);
 		min = 100;
+
+		for (auto k : v) {
+			for (auto j : k) {
+				cout << j << " ";
+			}
+			cout << endl;
+		}
+		cout << endl;
+
 	}
 
 	//이게 왜 돼..?? 진짜 킹받아.. -> 응안돼..
