@@ -23,14 +23,6 @@ vector<int> solution(int rows, int columns, vector<vector<int>> queries) {
 	vector<int> answer;
 	vector<vector<int>> v = set_v(rows, columns);
 
-	for (auto k : v) {
-		for (auto j : k) {
-			cout << j << " ";
-		}
-		cout << endl;
-	}
-	cout << endl;
-
 	int min = 0;
 	int temp, before, len, x, y, x1, x2, y1, y2;
 	for (auto q : queries) {
@@ -61,7 +53,7 @@ vector<int> solution(int rows, int columns, vector<vector<int>> queries) {
 			}
 
 			else if (y == q[1] - 1) {// 위
-				if (x - 1 > q[0] - 1) y++;
+				if (x - 1 < q[0] - 1) y++;
 				else x--;
 			}
 			if (temp < min) min = temp;
@@ -71,16 +63,8 @@ vector<int> solution(int rows, int columns, vector<vector<int>> queries) {
 		answer.push_back(min);
 		min = 100;
 
-		for (auto k : v) {
-			for (auto j : k) {
-				cout << j << " ";
-			}
-			cout << endl;
-		}
-		cout << endl;
 
 	}
 
-	//이게 왜 돼..?? 진짜 킹받아.. -> 응안돼..
 	return answer;
 }
