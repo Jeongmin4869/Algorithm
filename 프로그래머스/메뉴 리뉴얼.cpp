@@ -16,19 +16,20 @@ void dfs(string str, vector<string> &answer, vector<string> &orders) {
 	auto p = find(c.begin(), c.end(), n);
 	if (p != c.end()) {
 		bool b = true;
-		for (int i = 0; i < orders.size(); i++) {
-			for (int j = 0; j < str.size(); j++) {
-				auto p2 = find(orders[i].begin(), orders[i].end(), str[j]);
-				if (p2 == orders[i].end()) {
+		/*
+		for(int i=0; i<orders.size(); i++){
+			for(int j=0; j<str.size(); j++){
+				auto p2 =orders[i].find(str[j]);
+				if(p2 == string::npos){
 					b = false;
 					break;
 				}
 			}
-
-			if (b) answer.push_back(str);
-
+			if(b) answer.push_back(str);
 		}
 		//auto p = find(c.begin(), c.begin() + answer[i].size(),n);
+		*/
+		if (b) answer.push_back(str);
 		return;
 	}
 
