@@ -10,12 +10,17 @@ string solution(string p) {
 	stack<char> s;
 
 	for (int i = 0; i < p.size(); i++) {
-		if (p[i] == '(') s.push('(');
-		else {
+		if (p[i] == '(') {
+			if (i < p.size() / 2) s.push(p[i]);
+			else p.replace(i, 1, ")");
+		}
+		else { // ')'
 			if (s.top() == '(') s.pop();
-			else break;
+			else { // '))'
+				p.replace(i, 1, "(");
+			}
 		}
 	}
 
-	return answer = p;
+	return p;
 }
