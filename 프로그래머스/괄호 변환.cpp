@@ -9,7 +9,6 @@ bool check(string p);
 string solution(string p) {
 	string answer = "";
 	string u, v;
-	stack<char> s;
 	int count = 0;
 
 	if (p.size() == 0) return "";
@@ -23,8 +22,8 @@ string solution(string p) {
 		}
 
 		if (count == 0) {
-			u = p.substr(0, i + 1); // 오류
-			//v = p.substr(i+1, p.size()-i);
+			u = p.substr(0, i + 1);
+			v = p.substr(i + 1, p.size() - i);
 			cout << v;
 			break;
 		}
@@ -45,6 +44,7 @@ bool check(string p) {
 			//else p.replace(i - 1, 2, "()");
 		}
 		else if (p[i] == ')') {
+			if (!s.empty()) return false;
 			if (s.top() == '(') s.pop();
 			//else { // '))'
 			//	p.replace(i, 1, "(");
