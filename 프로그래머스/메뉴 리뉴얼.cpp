@@ -15,11 +15,8 @@ vector<bool> visited;
 // 3개로 구성된 유효한 코스가 {ABC}가 있다면 
 // 4개로 구성된 코스는 {ABC + 'C 다음 알파벳'}의 경우로만 탐색해주면 됩니다
 
-void dfs(string str, vector<string> &answer, vector<string> &orders) {
-	auto p = find(c.begin(), c.end(), str.size());
-	cout << str.size(); // 오류 ...
-	if (p != c.end()) {
-
+void dfs(int targetnum, string str, vector<string> &answer, vector<string> &orders) {
+	if (str.size() == targetnum) {
 		int count = 0;
 		for (int i = 0; i < orders.size(); i++) {
 			count++;
@@ -46,7 +43,7 @@ void dfs(string str, vector<string> &answer, vector<string> &orders) {
 		if (!visited[i]) {
 			visited[i] = true;
 			string str2 = str + al[i];
-			dfs(str2, answer, orders);
+			dfs(targetnum, str2, answer, orders);
 			visited[i] = false;
 		}
 	}
@@ -67,8 +64,8 @@ vector<string> solution(vector<string> orders, vector<int> course) {
 	al.assign(s.begin(), s.end());
 
 	visited.assign(al.size(), false);
-
-	dfs("", answer, orders);
-
+	for (int i = 0; i < course.size(); i++) {
+		dfs(course[i], "", answer, orders);
+	}
 	return answer;
 }
