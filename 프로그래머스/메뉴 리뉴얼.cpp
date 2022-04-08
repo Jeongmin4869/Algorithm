@@ -15,25 +15,23 @@ vector<bool> visited;
 // 4개로 구성된 코스는 {ABC + 'C 다음 알파벳'}의 경우로만 탐색해주면 됩니다
 
 void dfs(string str, vector<string> &answer, vector<string> &orders) {
-	int n = str.size();
 	auto p = find(c.begin(), c.end(), str.size());
+	cout << str.size(); // 오류 ...
 	if (p != c.end()) {
 
-		bool b = true;
 		int count = 0;
 		for (int i = 0; i < orders.size(); i++) {
-			count++;
-			b = true;
 			for (int j = 0; j < str.size(); j++) {
 				auto p2 = orders[i].find(str[j]);
 				if (p2 == string::npos) {
-					b = false;
+					count--;
 					break;
 				}
 			}
 		}
-		if (b && count > 1) answer.push_back(str);
+		if (count > 1) answer.push_back(str);
 
+		//if(b) answer.push_back(str);
 		return;
 	}
 
