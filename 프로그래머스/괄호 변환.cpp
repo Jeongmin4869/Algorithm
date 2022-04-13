@@ -29,15 +29,12 @@ string solution(string p) {
 	if (check(u)) {
 		return u + solution(v);
 	}
-	else {
-		u = u.substr(1, u.size() - 2);
-		for (int i = 0; i < u.size(); i++) {
-			if (u[i] == '(') u[i] = ')';
-			else u[i] = '(';
-		}
-		return "(" + solution(v) + ")" + u;
+	u = u.substr(1, u.size() - 2);
+	for (int i = 0; i < u.size(); i++) {
+		if (u[i] == '(') u[i] = ')';
+		else u[i] = '(';
 	}
-	return p;
+	return "(" + solution(v) + ")" + u;
 }
 
 bool check(string p) {
