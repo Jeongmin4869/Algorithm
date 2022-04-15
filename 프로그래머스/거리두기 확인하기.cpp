@@ -7,13 +7,13 @@ int dx[4];
 int dy[4];
 int N, M; // xรเ, yรเ  [y][x]
 int dfs(int x, int y, vector<string> place, int count) {
-	if (count == 2) return 0;
+	if (count > 2) return 0;
 
 	for (int i = 0; i < 4; i++) {
 		x += dx[i];
 		y += dy[i];
 		if ((x > 0 && y > 0) && (x < N && y < M)) {
-			if (place[y][x] != 'X' && !visited[y][x]) {
+			if (place[y][x] == 'X' && place[y][x] == 'O') {
 				visited[y][x] = true;
 				dfs(x, y, place, count++);
 				visited[y][x] = false;
@@ -35,7 +35,7 @@ vector<int> solution(vector<vector<string>> places) {
 			for (int x = 0; x < N; x++) {
 				if (place[y][x] == 'P') {
 					int n = dfs(x, y, place, 0);
-					if (n == 0) break
+					if (n == 0) break;
 				}
 			}
 		}
