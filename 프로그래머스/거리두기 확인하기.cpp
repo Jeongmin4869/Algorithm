@@ -1,13 +1,13 @@
-#include <string>
+﻿#include <string>
 #include <vector>
 #include <string.h> // memset
 using namespace std;
 bool visited[100][100];
 int dx[4];
 int dy[4];
-int N, M; // x��, y��  [y][x]
+int N, M; // x축, y축  [y][x]
 int dfs(int x, int y, vector<string> place, int count) {
-	if (count > 2) return 0;
+	if (count > 2) return 1;
 
 	for (int i = 0; i < 4; i++) {
 		x += dx[i];
@@ -20,7 +20,7 @@ int dfs(int x, int y, vector<string> place, int count) {
 			}
 		}
 	}
-	return 1;
+	return 0;
 }
 
 vector<int> solution(vector<vector<string>> places) {
@@ -31,16 +31,16 @@ vector<int> solution(vector<vector<string>> places) {
 		memset(visited, false, sizeof(visited));
 		N = place[0].size();
 		M = place.size();
-		for (int y = 0; y < M; y++) {
-			for (int x = 0; x < N; x++) {
-				if (place[y][x] == 'P') {
-					int n = dfs(x, y, place, 0);
-					if (n == 0) break;
-				}
-			}
-		}
+		int n = dfs(0, 0, place, 0);
+		answer.push_back(n);
 	}
 
 
 	return answer;
 }
+
+
+/*
+1) O를 기준으로 상하좌우 P가 있는지 체크하자.(2개이상)
+2) P를 기준으로 상하좌우 P가 있는지 체크하자.(1개이상)
+*/
