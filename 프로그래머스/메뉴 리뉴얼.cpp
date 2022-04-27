@@ -15,7 +15,7 @@ vector<bool> visited;
 // 3개로 구성된 유효한 코스가 {ABC}가 있다면 
 // 4개로 구성된 코스는 {ABC + 'C 다음 알파벳'}의 경우로만 탐색해주면 됩니다
 
-void dfs(int targetnum, string str, vector<string> &answer, vector<string> &orders) {
+void dfs(int targetnum, string str, int n, vector<string> &answer, vector<string> &orders) {
 	if (str.size() == targetnum) {
 		int count = 0;
 		for (int i = 0; i < orders.size(); i++) {
@@ -39,11 +39,11 @@ void dfs(int targetnum, string str, vector<string> &answer, vector<string> &orde
 	//dfs 순열 구하기(순열은 중복만을 X할뿐 )
 	// 순열로하면안된다 -> 조합
 	// int i=str.size() 해주었음.. // 이럼안됨!
-	for (int i = str.size(); i < al.size(); i++) {
+	for (int i = n; i < al.size(); i++) {
 		if (!visited[i]) {
 			visited[i] = true;
 			string str2 = str + al[i];
-			dfs(targetnum, str2, answer, orders);
+			dfs(targetnum, str2, i, answer, orders); // visiited 없애기
 			visited[i] = false;
 		}
 	}
@@ -65,7 +65,10 @@ vector<string> solution(vector<string> orders, vector<int> course) {
 
 	visited.assign(al.size(), false);
 	for (int i = 0; i < course.size(); i++) {
-		dfs(course[i], "", answer, orders);
+		dfs(course[i], "", 0, answer, orders);
+		visited.assign(al.size(), false);
 	}
+
+	//sort(answer.begin(), answer.end());
 	return answer;
 }

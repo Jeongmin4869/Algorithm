@@ -14,8 +14,7 @@ vector<string> v(string str) {
 			continue;
 		}
 		string s;
-		s.append(1, before);
-		s.append(1, tolower(str[i]));
+		s.append(1, before).append(1, tolower(str[i]));
 		vec.push_back(s);
 		before = tolower(str[i]);
 	}
