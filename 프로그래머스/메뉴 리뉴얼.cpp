@@ -3,11 +3,13 @@
 #include <algorithm>
 #include <set>
 #include <iostream>
+#include <map>
 
 using namespace std;
 vector<int> c;
 vector<char> al;
 vector<bool> visited;
+map<string, int> hashMap;
 //N:3, M:2 // N은 원소의 개수, M은 뽑을 개수
 //같은 글자수 중 가장 많이 주문한 답만 출력, 수가 같다면 같이.. 
 //AD가 세 번, CD가 세 번, ACD가 두 번, ADE가 두 번, XYZ 가 두 번
@@ -31,6 +33,7 @@ void dfs(int targetnum, string str, int n, vector<string> &answer, vector<string
 		if (count > 1) {
 			//코스메뉴 갯수당 count값이 가장 큰것만
 			answer.push_back(str);
+			hashMap[str] += 1;
 		}
 		//if(b) answer.push_back(str);
 		return;
@@ -68,6 +71,17 @@ vector<string> solution(vector<string> orders, vector<int> course) {
 		dfs(course[i], "", 0, answer, orders);
 		visited.assign(al.size(), false);
 	}
+
+	int max = 0;
+	for (auto m : hashMap) {
+		int n = m.second;
+		if (n > max) max = n;
+	}
+
+	for (auto m : hashMap) {
+		if (m.second == max) answer.push_back(m.first);
+	}
+
 
 	//sort(answer.begin(), answer.end());
 	return answer;
