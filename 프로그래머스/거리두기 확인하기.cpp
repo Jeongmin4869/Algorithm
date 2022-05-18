@@ -10,17 +10,23 @@ bool visited[100][100];
 int dx[4];
 int dy[4];
 int N, M; // x축, y축  [y][x]
-
-bool dfs(int x, int y, vector<string> place, int count) {
-	if (count > 2 || place[y][x] == 'X') return false;
+bool isSafe;
+void dfs(int y, int x, vector<string> place, int count) {
+	if (count > 2 || place[y][x] == 'X') {
+		isSafe = false;
+		return;
+	}
 	else {
-		if (count != 0 && place[y][x] == 'P') return true;
+		if (count != 0 && place[y][x] == 'P') {
+			isSafe = true;
+			return;
+		}
 
 		for (int i = 0; i < 4; i++) {
 			x += dx[i];
 			y += dy[i];
-			if ((x > 0 && y > 0) && (x < N && y < M)) {
-				if (place[y][x] == 'P') {
+			if ((x >= 0 && y >= 0) && (x < N && y < M)) {
+				if (!visited[y][x]) {
 					visited[y][x] = true;
 					dfs(x, y, place, count++);
 					visited[y][x] = false;
@@ -28,28 +34,29 @@ bool dfs(int x, int y, vector<string> place, int count) {
 			}
 		}
 	}
+	return;
 }
 
 //P좌표로 풀기? 탐색으로 풀기?
 vector<int> solution(vector<vector<string>> places) {
 	vector<int> answer;
-	bool isSafe = true;
 	dx[0] = 1; dx[1] = 0; dx[2] = -1; dx[3] = 0;
 	dy[0] = 0; dy[1] = 1; dy[2] = 0; dy[3] = -1;
 	for (auto place : places) {
+		isSafe = true;
 		memset(visited, false, sizeof(visited));
 		N = place[0].size();
 		M = place.size();
-		for (int i = 0; i < place.size(); i++) {
-			for (int j = 0; j < place[i].size(); j++) {
-				if (place[i][j] == 'P') {
-					isSafe = dfs(i, j, place, 0);
+		for (int y = 0; y < place.size(); y++) {
+			for (int x = 0; x < place[y].size(); x++) {
+				if (place[y][x] == 'P') {
+					dfs(y, x, place, 0);
 					if (isSafe == 0) break;
 				}
 			}
 			if (isSafe == 0) break;
 		}
-		//isSafe==true?answer.push_back(1) : answer.push_back(0);
+		isSafe == true ? answer.push_back(1) : answer.push_back(0);
 	}
 
 
