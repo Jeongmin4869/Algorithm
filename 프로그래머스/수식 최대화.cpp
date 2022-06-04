@@ -2,6 +2,7 @@
 #include <vector>
 #include <sstream>
 #include <stack>
+#include <iostream> // 삭제
 
 
 using namespace std;
@@ -18,7 +19,7 @@ int dfs(string expression){
 }
 
 int calc(int a, int b, char ch){
-    int n;
+    int n = 0;
     switch(ch){
         case '-':
             n = a-b;
@@ -40,23 +41,51 @@ long long solution(string expression) {
                                     {'*', '-', '+'}, {'*', '+', '-'}};
     
     int max_val = 0;
-    int val;
+    int val = 0;
     int num;
     char sign;
     stack<int> dial;
     stack<char> ca;
+    string ex = expression;
     
     for(auto prior : priors){
         //while 문자열 자르기
-        stringstream ss(expression);
+        stringstream ss(ex);
         
         for(int i=0; i<prior.size(); i++){
-            ss>dial;
-            ss>ca;
+            while(ss>>num){
+                dial.push(num);
+                if(ss>>sign){
+                    ca.push(sign); 
+                    if(ca.top() == prior[i]){
+                        int num2, num = dial.top();
+                        ss >> num2;
+                        dial.pop();
+                        dial.push(calc(num, num2, sign));
+                        break;
+                    }  
+                }
+            }
             
-        
+            if(ca.empty()){
+                val = dial.top();
+                dial.pop();
+                break;
+            }
+            
+            //문자열을 만들자
+            while(dial.empty()){
+                ex = "";
+                ex.insert(0,to_string(dial.top()));
+                dial.pop();
+                if(!ca.empty()){
+                    ex.insert(0, to_string(ca.top()));
+                    ca.pop();
+                }
+            }
         }
-        
+
+
         if(val > max_val) max_val = val;        
     }
     
