@@ -1,0 +1,56 @@
+#include <string>
+#include <vector>
+#include <queue>
+using namespace std;
+
+/*******************
+사용한 자료구조 : 큐
+********************/
+
+int solution(vector<int> priorities, int location) {
+    queue<int> q;
+    int index = location, j, next, count = 0;
+    bool en_pop = true;
+    
+    for(int pri : priorities){
+        q.push(pri);
+    }
+    
+    
+    while(1){
+        
+        en_pop = true;
+        j = q.front();
+        q.pop();
+        if(q.empty()){
+            count++; 
+            break;
+        }
+        
+        int size = q.size();
+        for (int i=0; i<size; i++){
+            next = q.front();
+            q.pop();
+            if(next > j) en_pop = false;
+            q.push(next);
+        }
+        
+        if(!en_pop){ // 더 높은 레벨이 있음
+            q.push(j);
+            if(index == 0) 
+                index = q.size() -1;
+            else 
+                index--;
+        }
+        else { // 더 낮은 레벨이 없음
+            count++;
+            if(index == 0) 
+                break;
+            else 
+                index--;
+        }
+    }
+
+    
+    return  count;
+}
