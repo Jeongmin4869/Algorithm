@@ -1,0 +1,35 @@
+#include <string>
+#include <vector>
+#include <set>
+#include <map>
+using namespace std;
+
+/******************************
+
+사용한 자료구조 : set, multmap
+
+*******************************/
+
+string solution(vector<int> numbers) {
+    string answer = "";
+    multimap<string, int> map;
+    for(auto number : numbers){
+        string n = to_string(number);
+        while(n.size() < 4) { // 4 이하 까지
+            n = n + n;
+        }
+        n = n.substr(0, 4);
+        map.insert(make_pair(n,to_string(number).size()));
+    }
+    
+    for(auto m : map){
+        string str = m.first;
+        answer = str.substr(0, m.second) + answer;
+    }
+    
+    // "0000" 처럼 맨 앞이 0으로 시작할 경우 = 0 
+    if(answer[0] == '0'){
+        return "0";
+    }
+    return answer;
+}
