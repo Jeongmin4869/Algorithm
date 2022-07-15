@@ -1,0 +1,62 @@
+#include <string>
+#include <vector>
+#include <cmath>
+#include <set>
+using namespace std;
+
+/******************************
+
+사용한 자료구조 : set
+
+******************************/
+
+vector<bool> visited;
+set<int> ss;
+
+bool sosu(int n){
+    if(n<2) return false;
+    int nn = sqrt(n);
+    for(int i=2; i<=nn; i++){
+        if(n%i==0) return false;
+    }
+    return true;
+}
+
+//깊이 탐색으로 순열 구하기
+void dfs(int len, string str, vector<string> v){
+    if(str.length() == len) {
+        //중복되는 값 없애기 위해 set
+        ss.insert(stoi(str)); 
+        return; 
+    }
+    
+    for(int i=0; i<v.size(); i++){
+        if(!visited[i]){
+            visited[i] = true;
+            string s = str + v[i];
+            dfs(len,s,v);
+            visited[i] = false;
+        }
+    }
+}
+
+int solution(string numbers) {
+    int answer = 0;
+    vector<string> v;
+    for(int i=0; i<numbers.size(); i++){
+        v.push_back(numbers.substr(i, 1));
+    }
+    
+    //깊이탐색으로 모든 순열(중복) 구하기
+    for(int i=1; i<=numbers.length(); i++){
+        visited.assign(7, false);
+        dfs(i, "", v);
+    }
+    
+    //소수확인
+    for(auto s : ss){
+        if(sosu(s)) answer ++;
+    }
+    
+    return answer;
+}
