@@ -1,34 +1,20 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 #include <map>
 using namespace std;
-// map과 이분 탐색을 이용.
-// map은 조건을 key, 점수를 value로 구성한다.
 
 /*
-1) info를 파싱하는데, -를 포함한 모든 경우의 수를 map에 넣어준다. query에서 나올 수 있는 조건을 모두 map에 넣어주면 된다. 2^4 = 16 이기 때문에 시간초과는 걱정하지 않아도 된다.
-
-ex) "javabackendjuniorpizza"가 파싱 결과라면, "-backendjuniorpizza", "--juniorpizza", "---pizza"...
-
- 
-
+1) info를 파싱하는데, -를 포함한 모든 경우의 수를 map에 넣어준다. query에서 나올 수 있는 조건을 모두 map에 넣어주면 된다. 2^
 2) map을 순회하면서 점수를 오름차순으로 정렬해준다. 이분 탐색을 위해 정렬이 필요하다.
-
- 
-
 3) query를 파싱하여 조건을 나타내는 문자열을 얻는다.
-
-만약 query[0]의 파싱 결과가 "--senior-" 라면 map에서 해당 문자열을 찾아 점수를 확인한다.
-
-점수는 이분탐색을 통해 찾으며, lower_bound() 함수를 이용해 파싱한 점수보다 작지 않은 값 중 가정 첫 번째 위치를 가져온다.
-
-그리고 answer[i]에 답을 넣어주면 된다.
 */
 
 /*
 1. info 에 대해 모든 가능한 경우의 수 구하기.
-2. map key를 조건, value를 점수로 해 점수를 기준으로 정렬하기
+2. map key를 조건, value를 점수로 해 map의 점수들을 각각 정렬하기.
+3. query파싱하고, 비교하기
 */
 
 
@@ -42,11 +28,11 @@ vector<int> solution(vector<string> info, vector<string> query) {
         string str;
         stringstream ss(info[i]);
         while(ss >> str){
-            if(idx==4){
-                score = stoi(str);
+            if(idx < 4){
+                v[idx++][0] = str;
             }
             else {
-                v[idx++][0] = str;
+                score = stoi(str);
             }
         }
         
@@ -63,15 +49,39 @@ vector<int> solution(vector<string> info, vector<string> query) {
                         s4 = v[3][d];
                         m[s1 + s2 + s3 + s4].push_back(score);
                     }
-                }    
-                
-                    
+                }       
             }
-            
-            
         }
-        
     }
+        
+    //map의 score를 정렬
+    for(auto itr = m.begin(); itr != m.end(); itr++){
+        sort(itr->second.begin(), itr->second.end());
+    }
+        
+    //query 파싱, 비교
+    for(int i=0; i<query.size(); i++){
+        stringstream ss(query[i]);
+        string str="";
+        string t;
+        int score, count = 0;
+            
+       while(ss >> str){
+            
+            if(str == "and") continue;
+            
+            if(count ++ <4){
+                t += str;
+            }
+            else {
+                score = stoi(str);
+            }
+        }
+            
+        // lower_bound : 2진탐색
+        int idx = lower_bound(m[t].begin(), m[t].end(), score) - m[t].begin() ;
+        answer[i] = m[t].size() - idx;
+    } 
     
     return answer;
 }
