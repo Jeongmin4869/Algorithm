@@ -1,7 +1,6 @@
 ﻿#include <string>
 #include <vector>
 #include <algorithm>
-#include <iostream>
 using namespace std;
 
 vector<string> v(string str) {
@@ -39,7 +38,6 @@ int solution(string str1, string str2) {
 			vec1.erase(vec1.begin() + i--);
 		}
 	}
-	cout << endl;
 	uni -= inter;
 	answer = (float)inter / uni;
 
