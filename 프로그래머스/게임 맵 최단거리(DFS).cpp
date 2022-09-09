@@ -30,10 +30,10 @@ void dfs(int y, int x, int count){
             if(map[ny][nx]){ // 1(길)이라면..
                 map[y][x] = 0;
                 dfs(ny, nx, count);
+                map[y][x] = 1;
             }
         }
     }
-    map[y][x] = 1;
     
 }
 
