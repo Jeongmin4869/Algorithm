@@ -7,10 +7,7 @@ int answer = 0;
 vector<bool> visited;
 
 void dfs(int len, int count, int HP, vector<vector<int>> dungeons){
-    if(len == s){
-        answer<count?answer=count:answer;
-        return;
-    }
+    if(answer < count) answer = count;
     
     for(int i=0; i<s; i++){
         if(!visited[i]){
@@ -30,6 +27,5 @@ int solution(int k, vector<vector<int>> dungeons) {
     visited.assign(8,false);
     dfs(0,0,k,dungeons);
 
-    
     return answer;
 }
