@@ -7,30 +7,26 @@ vector<string> al = {"A", "E", "I", "O", "U"};
 int count = 0;
 int answer;
 
-void dfs(string s, string word, int depth){
-    
-    cout << s << endl;
-    
-    if(depth >= 5){ // ???
-        return;
-    }
-    
+void dfs(string s, string word){
+
     if(s == word){
-        cout << s.size() << " , " << s <<  endl;
         answer = count;
         return;
     }
     
+    if(s.size() == 5){ // ???
+        return;
+    }
+    
     for(int i=0; i<al.size(); i++){
-        if(depth < 5){ // ???
-            count++;
-            s = s + al[i];
-            dfs(s, word, depth+1);
-        }
+        count++;
+        string str = s + al[i];
+        dfs(str, word);
+        
     }
 }
 
 int solution(string word) {
-    dfs("", word, 0);
+    dfs("", word);
     return answer;
 }
