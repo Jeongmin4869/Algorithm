@@ -1,0 +1,92 @@
+/*
+*
+* 효율성 통과 X
+* 사용 알고리즘 : 순열
+* 효율성 :  O(N!)
+*
+*/
+
+/*
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<bool> visited;
+long long count = 0;
+string answer;
+
+
+//순열
+void dfs(string s,int n, long long k){
+    
+    if(s.size() == n){
+        count ++;
+        if(count == k){
+            answer = s;
+        }   
+        return;
+    }
+    
+    for(int i=0; i<n; i++){
+        if(!visited[i]){
+            visited[i] = true;
+            string str = s + to_string(i+1);
+            dfs(str,n,k);
+            visited[i] = false;
+        }
+    }
+}
+
+vector<int> solution(int n, long long k) {
+    
+    visited.assign(n, false);
+    vector<int> v;
+    dfs("", n, k);
+    
+    for(char c : answer){
+        v.push_back(c-'0');
+    }
+    
+    return v;
+}
+
+*/
+
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+//(n-1)!은 n!/n과 같다.
+
+//팩토리얼 재귀함수로 구현
+long long facto(long long num){
+    if(num == 1) return 1;
+    return num * facto(num-1);
+}
+
+vector<int> solution(int n, long long k) {
+    
+    vector<int> answer;
+    vector<int> number;
+    for(int i=1; i<= n; i++){
+        number.push_back(i);
+    }
+    
+    k-=1;
+    long long f = facto(n);
+    long long div , mod ; 
+    
+    while(n > 0){
+        f/=n;
+        div = k/f;
+        mod = k%f;
+        answer.push_back(number[div]);
+        number.erase(number.begin()+div);
+        k=mod;
+        n--;
+    }
+    
+    return answer;
+}
