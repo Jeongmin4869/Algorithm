@@ -21,12 +21,16 @@ vector<int> dist; // 각 마을마다 최단거리 기록
 void dijkstra(){
     
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int,int>>> pq; // Min Heap
+    //최소힙을 구하는 연산을 통해서 최소비용이 드는 정점들부터 처리
     pq.push({1,0}); // 초기값. 1부터 시작한다. 
     
     while(!pq.empty()){
         int cur = pq.top().first; // 현재위치
         int cost = pq.top().second; // 이동거리
         pq.pop();
+        
+        // 무시해야 하는 정보 확인
+        if(dist[cur] < cost) continue;
         
         for(int i=0; i<v[cur].size(); i++){ // 현재 cur와 연결된 모든 노드들과의 거리를 비교한다. 
             int next = v[cur][i].first; // 다음 큐의 노드 위치
