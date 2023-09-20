@@ -13,20 +13,17 @@ vector<int> solution(string msg) {
         m[s] = i+1;
     }
     
-    string str1 = "", str2 = "";
+    string str = "";
     
-    for(int i=0; i<msg.length(); i++){
-        str2 = str1 + msg[i];
-        if(m.find(str2) == m.end()){
-            answer.push_back(m[str1]);
-            m[str2] = m.size()+1;
-            str1 = "";
-            i--;
-            continue;
+    for(int i=0; i<msg.length();){
+        
+        str = "";
+        while(i<msg.length() && m.find(str+msg[i]) != m.end()){
+            str += msg[i++];
         }
-        str1 = str1 + msg[i];
+        answer.push_back(m[str]);
+        if(i<msg.length()) m[str+msg[i]] = m.size() + 1;
+
     }
-    answer.push_back(m[str1]);
-    
     return answer;
 }
