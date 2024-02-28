@@ -24,6 +24,9 @@ void dfs(vector<int> &picks, vector<string> &minerals, int now, int sum){
     int sumarr[3] = {0, };
     
     // 백트래킹
+    if(sum > answer) return;
+    
+    // 종료조건
     if(now >= mine_size || (picks[0] == 0 && picks[1] == 0 && picks[2] == 0)){
         answer = min(answer, sum);
         return;
