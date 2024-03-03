@@ -61,10 +61,6 @@ int solution(vector<vector<string>> relation) {
             i--;
         }
     }
-
-    cout << keys.size() << endl;
-    
-    sort(keys.begin(), keys.end());
     
     // 3 희소성 확인
     for(int i=0; i<keys.size()-1; i++){
